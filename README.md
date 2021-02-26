@@ -50,15 +50,15 @@ has_one :shipping
 
 
 ## shippings テーブル
-|Column        |Type                  |Options                          |
-|--------------|----------------------|-------------------------------- |
-| prefectures  | string               | null: false                     |
-| postalcode   | string               | null: false                     |
-| municipality | string               | null: false                     |
-| addres       | string               | null: false                     |
-| building     | string               |                                 |
-| phonenumber  | string               | null: false                     |
-| purchase     | references           | null: false, foreign_key: true  |
+|Column           |Type                  |Options                          |
+|---------------- |----------------------|-------------------------------- |
+| prefectures_id  | integer              | null: false                     |
+| postalcode      | string               | null: false                     |
+| municipality    | string               | null: false                     |
+| addres          | string               | null: false                     |
+| building        | string               |                                 |
+| phonenumber     | string               | null: false                     |
+| purchase        | references           | null: false, foreign_key: true  |
 
 
 ### Association
