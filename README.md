@@ -1,24 +1,69 @@
-# README
+#テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|Column                  |Type       |Options           |
+|----------------------- |---------- |----------------- |
+| nickname               | string    |  null: false     |
+| email                  | string    |  null: false     |
+| password               | string    |  null: false     |
+| passwordconfirmation   | string    |  null: false     |
+| firstname              | string    |  null: false     |
+| lastname               | string    |  null: false     |
+| kanafirstname          | string    |  null: false     |
+| kanalastname           | string    |  null: false     |
+| year                   | string    |  null: false     |
+| month                  | string    |  null: false     |
+| day                    | string    |  null: false     |
 
-* Ruby version
 
-* System dependencies
+### Association
+has_many :products
+has_many :parchases
 
-* Configuration
 
-* Database creation
+## products テーブル
+|Column        |Type                  |Options                         |
+|--------------|----------------------|------------------------------- |
+| seller       | references           | null: false, foreign_key: true |
+| image        | ActiveStorageで実装   | ActiveStorageで実装             |
+| productname  | string               |  null: false                   |
+| description  | text                 |  null: false                   |
+| category     | string               |  null: false                   |
+| status       | string               |  null: false                   |
+| burden       | string               |  null: false                   |
+| days         | string               |  null: false                   |
+| year         | string               |  null: false                   |
+| price        | string               |  null: false                   |
 
-* Database initialization
 
-* How to run the test suite
+### Association
+belongs_to :user
+has_one :parchases
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## parchases テーブル
+|Column           |Type                  |Options      |
+|-----------------|----------------------|-------------|
+| who             | string               | null: false |
+| purchase        | string               | null: false |
 
-* ...
+
+### Association
+belongs_to :user
+belongs_to :products
+has_one :shippings
+
+
+## shippings テーブル
+|Column        |Type                  |Options       |
+|--------------|----------------------|------------- |
+| prefectures  | string               | null: false  |
+| postalcode   | string               | null: false  |
+| municipality | string               | null: false  |
+| addres       | string               | null: false  |
+| building     | string               | null: false  |
+| phonenumber  | string               | null: false  |
+
+### Association
+belongs_to :parchases
