@@ -22,7 +22,6 @@ has_many :parchases
 ## products テーブル
 |Column        |Type                  |Options                           |
 |--------------|----------------------|----------------------------------|
-| seller       | references           | null: false, foreign_key: true   |
 | productname  | string               |  null: false                     |
 | description  | text                 |  null: false                     |
 | category_id  | string               |  null: false                     |
@@ -30,11 +29,12 @@ has_many :parchases
 | burden_id    | string               |  null: false                     |
 | days_id      | string               |  null: false                     |
 | price        | string               |  null: false                     |
+| prefectures  | string               |  null: false                     |
 | user         | references           |  null: false, foreign_key: true  |
 
 ### Association
 belongs_to :user
-has_one :parchases
+has_one :parchase
 
 
 ## parchases テーブル
@@ -45,8 +45,8 @@ has_one :parchases
 
 ### Association
 belongs_to :user
-belongs_to :products
-has_one :shippings
+belongs_to :product
+has_one :shipping
 
 
 ## shippings テーブル
@@ -62,4 +62,4 @@ has_one :shippings
 
 
 ### Association
-belongs_to :parchases
+belongs_to :parchase
