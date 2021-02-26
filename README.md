@@ -2,46 +2,46 @@
 
 ## users テーブル
 
-|Column                  |Type       |Options           |
-|----------------------- |---------- |----------------- |
-| nickname               | string    |  null: false     |
-| email                  | string    |  unique: true    |
-| encrypted_password     | string    |  null: false     |
-| firstname              | string    |  null: false     |
-| lastname               | string    |  null: false     |
-| kana_firstname         | string    |  null: false     |
-| kana_lastname          | string    |  null: false     |
-| birthday               | date      |  null: false     |
+|Column                  |Type       |Options                        |
+|----------------------- |---------- |------------------------------ |
+| nickname               | string    |  null: false                  |
+| email                  | string    |  null: false, unique: true    |
+| encrypted_password     | string    |  null: false                  |
+| firstname              | string    |  null: false                  |
+| lastname               | string    |  null: false                  |
+| kana_firstname         | string    |  null: false                  |
+| kana_lastname          | string    |  null: false                  |
+| birthday               | date      |  null: false                  |
 
 
 ### Association
 has_many :products
-has_many :parchases
+has_many :purchases
 
 
 ## products テーブル
-|Column        |Type                  |Options                           |
-|--------------|----------------------|----------------------------------|
-| productname  | string               |  null: false                     |
-| description  | text                 |  null: false                     |
-| category_id  | string               |  null: false                     |
-| status_id    | string               |  null: false                     |
-| burden_id    | string               |  null: false                     |
-| days_id      | string               |  null: false                     |
-| price        | string               |  null: false                     |
-| prefectures  | string               |  null: false                     |
-| user         | references           |  null: false, foreign_key: true  |
+|Column           |Type                  |Options                           |
+|-----------------|----------------------|----------------------------------|
+| productname     | string               |  null: false                     |
+| description     | text                 |  null: false                     |
+| category_id     | integer              |  null: false                     |
+| status_id       | integer              |  null: false                     |
+| burden_id       | integer              |  null: false                     |
+| days_id         | integer              |  null: false                     |
+| price           | integer              |  null: false                     |
+| prefectures_id  | integer              |  null: false                     |
+| user            | references           |  null: false, foreign_key: true  |
 
 ### Association
 belongs_to :user
-has_one :parchase
+has_one :purchase
 
 
-## parchases テーブル
+## purchases テーブル
 |Column           |Type                  |Options                          |
 |-----------------|----------------------|-------------------------------- |
 | user            | references           | null: false, foreign_key: true  |
-| purchase        | references           | null: false, foreign_key: true  |
+| product         | references           | null: false, foreign_key: true  |
 
 ### Association
 belongs_to :user
@@ -58,8 +58,8 @@ has_one :shipping
 | addres       | string               | null: false                     |
 | building     | string               |                                 |
 | phonenumber  | string               | null: false                     |
-| user         | references           | null: false, foreign_key: true  |
+| purchase     | references           | null: false, foreign_key: true  |
 
 
 ### Association
-belongs_to :parchase
+belongs_to :purchase
