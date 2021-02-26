@@ -5,16 +5,13 @@
 |Column                  |Type       |Options           |
 |----------------------- |---------- |----------------- |
 | nickname               | string    |  null: false     |
-| email                  | string    |  null: false     |
-| password               | string    |  null: false     |
-| passwordconfirmation   | string    |  null: false     |
+| email                  | string    |  unique: true    |
+| encrypted_password     | string    |  null: false     |
 | firstname              | string    |  null: false     |
 | lastname               | string    |  null: false     |
-| kanafirstname          | string    |  null: false     |
-| kanalastname           | string    |  null: false     |
-| year                   | string    |  null: false     |
-| month                  | string    |  null: false     |
-| day                    | string    |  null: false     |
+| kana_firstname         | string    |  null: false     |
+| kana_lastname          | string    |  null: false     |
+| birthday               | date      |  null: false     |
 
 
 ### Association
@@ -23,19 +20,17 @@ has_many :parchases
 
 
 ## products テーブル
-|Column        |Type                  |Options                         |
-|--------------|----------------------|------------------------------- |
-| seller       | references           | null: false, foreign_key: true |
-| image        | ActiveStorageで実装   | ActiveStorageで実装             |
-| productname  | string               |  null: false                   |
-| description  | text                 |  null: false                   |
-| category     | string               |  null: false                   |
-| status       | string               |  null: false                   |
-| burden       | string               |  null: false                   |
-| days         | string               |  null: false                   |
-| year         | string               |  null: false                   |
-| price        | string               |  null: false                   |
-
+|Column        |Type                  |Options                           |
+|--------------|----------------------|----------------------------------|
+| seller       | references           | null: false, foreign_key: true   |
+| productname  | string               |  null: false                     |
+| description  | text                 |  null: false                     |
+| category_id  | string               |  null: false                     |
+| status_id    | string               |  null: false                     |
+| burden_id    | string               |  null: false                     |
+| days_id      | string               |  null: false                     |
+| price        | string               |  null: false                     |
+| user         | references           |  null: false, foreign_key: true  |
 
 ### Association
 belongs_to :user
@@ -43,11 +38,10 @@ has_one :parchases
 
 
 ## parchases テーブル
-|Column           |Type                  |Options      |
-|-----------------|----------------------|-------------|
-| who             | string               | null: false |
-| purchase        | string               | null: false |
-
+|Column           |Type                  |Options                          |
+|-----------------|----------------------|-------------------------------- |
+| user            | references           | null: false, foreign_key: true  |
+| purchase        | references           | null: false, foreign_key: true  |
 
 ### Association
 belongs_to :user
@@ -56,14 +50,16 @@ has_one :shippings
 
 
 ## shippings テーブル
-|Column        |Type                  |Options       |
-|--------------|----------------------|------------- |
-| prefectures  | string               | null: false  |
-| postalcode   | string               | null: false  |
-| municipality | string               | null: false  |
-| addres       | string               | null: false  |
-| building     | string               | null: false  |
-| phonenumber  | string               | null: false  |
+|Column        |Type                  |Options                          |
+|--------------|----------------------|-------------------------------- |
+| prefectures  | string               | null: false                     |
+| postalcode   | string               | null: false                     |
+| municipality | string               | null: false                     |
+| addres       | string               | null: false                     |
+| building     | string               |                                 |
+| phonenumber  | string               | null: false                     |
+| user         | references           | null: false, foreign_key: true  |
+
 
 ### Association
 belongs_to :parchases
