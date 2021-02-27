@@ -1,5 +1,5 @@
 class FyrimasController < ApplicationController
-  def index
+  def index 
   end
 
   def new
