@@ -6,5 +6,6 @@ class FyrimasController < ApplicationController
   end
 
   def create
+    
   end
 end
