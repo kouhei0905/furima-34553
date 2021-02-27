@@ -10,9 +10,9 @@ RSpec.describe User, type: :model do
     it 'nicknameとemail、passwordとpassword_confirmationとfirstnameとlastnameとkana_firstnameとkana_lastnameとbirthdayが存在すれば登録できる' do
       expect(@user).to be_valid
     end
-    it 'passwordとpassword_confirmationが6文字以上であれば登録できる' do
-      @user.password = '000000'
-      @user.password_confirmation = '000000'
+    it 'passwordとpassword_confirmationは英数字6文字以上であれば登録できる' do
+      @user.password = 'a000000'
+      @user.password_confirmation = 'a000000'
       expect(@user).to be_valid
     end
     end
@@ -44,10 +44,22 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Firstname can't be blank")
     end
 
+    it 'firstnameが半角では登録できない' do
+      @user.firstname = 'test'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Firstname is invalid")
+    end
+
     it 'laststnameが空では登録できない' do
       @user.lastname = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Lastname can't be blank")
+    end
+
+    it 'laststnameが半角では登録できない' do
+      @user.lastname = 'test'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Lastname is invalid")
     end
 
     it 'kana_firstnameが空では登録できない' do
@@ -56,10 +68,22 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Kana firstname can't be blank")
     end
 
+    it 'kana_firstnameはカタカナ以外では登録できない' do
+      @user.kana_firstname = 'あ青ta'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Kana firstname is invalid")
+    end
+
     it 'kana_lastnameが空では登録できない' do
       @user.kana_lastname = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Kana lastname can't be blank")
+    end
+
+    it 'kana_lastnameはカタカナ以外では登録できない' do
+      @user.kana_lastname = 'あ青te'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Kana lastname is invalid")
     end
 
     it 'birthdayが空では登録できない' do
@@ -80,6 +104,13 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = '00000'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+    end
+
+    it 'passwordは英字と数字の両方を入力しないと登録できない' do
+      @user.password = '1111111'
+      @user.password_confirmation = '1111111'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
 
     it 'メールアドレスに@がないと登録できない' do
