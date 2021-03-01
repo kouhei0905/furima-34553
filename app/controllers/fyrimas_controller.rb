@@ -3,6 +3,7 @@ class FyrimasController < ApplicationController
   end
 
   def new
+    @fyrima = Fyrima.new
   end
 
   def create
