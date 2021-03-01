@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :genre
+  belongs_to :user
 
   has_one_attached :image
 
@@ -12,5 +13,6 @@ class Product < ApplicationRecord
     validates :status_id
     validates :burden_id
     validates :days_id
-    validates :price 
+    validates :price
+  end
 end
