@@ -30,49 +30,66 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Productname can't be blank")
       end
-
       it 'imageが空では登録できない' do
         @product.image = nil
         @product.valid?
         expect(@product.errors.full_messages).to include("Image can't be blank")
       end
-
       it 'descriptionが空では登録できない' do
         @product.description = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Description can't be blank")
       end
-
       it 'genre_idが空では登録できない' do
         @product.genre_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Genre can't be blank", 'Genre is not a number')
       end
-
+      it 'genre_idが１では登録できない' do
+        @product.genre_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Genre must be other than 1")
+      end
       it 'status_idが空では登録できない' do
         @product.status_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
       end
-
+      it 'status_idが1では登録できない' do
+        @product.status_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Status must be other than 1")
+      end
       it 'burden_idが空では登録できない' do
         @product.burden_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Burden can't be blank", 'Burden is not a number')
       end
-
+      it 'burden_idが1では登録できない' do
+        @product.burden_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Burden must be other than 1")
+      end
       it 'd_day_idが空では登録できない' do
         @product.d_day_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("D day can't be blank", 'D day is not a number')
       end
-
+      it 'd_day_idが1では登録できない' do
+        @product.d_day_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("D day must be other than 1")
+      end
       it 'prefecture_idが空では登録できない' do
         @product.prefecture_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
-
+      it 'prefecture_idが1では登録できない' do
+        @product.prefecture_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Prefecture must be other than 1")
+      end
       it 'priceが空では登録できない' do
         @product.price = ''
         @product.valid?

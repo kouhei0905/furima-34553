@@ -29,5 +29,7 @@ class Product < ApplicationRecord
     validates :burden_id
     validates :prefecture_id
   end
+
   validates :price, numericality: true
+  
 end
