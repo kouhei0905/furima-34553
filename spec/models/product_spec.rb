@@ -15,7 +15,7 @@ RSpec.describe Product, type: :model do
         expect(@product).to be_valid
       end
       it 'priceが9,999,999円なら出品できる' do
-        @product.price = 9999999
+        @product.price = 9_999_999
         expect(@product).to be_valid
       end
       it 'priceが半角なら出品できる' do
@@ -23,7 +23,7 @@ RSpec.describe Product, type: :model do
         expect(@product).to be_valid
       end
     end
-    
+
     context '商品出品できないとき' do
       it 'productnameが空では登録できない' do
         @product.productname = ''
@@ -46,31 +46,31 @@ RSpec.describe Product, type: :model do
       it 'genre_idが空では登録できない' do
         @product.genre_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Genre can't be blank", "Genre is not a number")
+        expect(@product.errors.full_messages).to include("Genre can't be blank", 'Genre is not a number')
       end
 
       it 'status_idが空では登録できない' do
         @product.status_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Status can't be blank", "Status is not a number")
+        expect(@product.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
       end
 
       it 'burden_idが空では登録できない' do
         @product.burden_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Burden can't be blank", "Burden is not a number")
+        expect(@product.errors.full_messages).to include("Burden can't be blank", 'Burden is not a number')
       end
 
       it 'd_day_idが空では登録できない' do
         @product.d_day_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("D day can't be blank", "D day is not a number")
+        expect(@product.errors.full_messages).to include("D day can't be blank", 'D day is not a number')
       end
 
       it 'prefecture_idが空では登録できない' do
         @product.prefecture_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+        expect(@product.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
 
       it 'priceが空では登録できない' do
@@ -84,7 +84,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
       it 'priceが9,999,999円以上だと出品できない' do
-        @product.price = 10000000
+        @product.price = 10_000_000
         @product.valid?
         expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
@@ -93,15 +93,15 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
-      it "priceが半角英数混合では登録できないこと" do
-        @product.price = "5000dollar"
+      it 'priceが半角英数混合では登録できないこと' do
+        @product.price = '5000dollar'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not a number")
+        expect(@product.errors.full_messages).to include('Price is not a number')
       end
-      it "priceが半角英語だけでは登録できないこと" do
-        @product.price = "threemillion"
+      it 'priceが半角英語だけでは登録できないこと' do
+        @product.price = 'threemillion'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not included in the list")
+        expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
     end
   end

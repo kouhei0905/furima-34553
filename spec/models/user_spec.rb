@@ -98,7 +98,6 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Kana lastname is invalid')
       end
 
-
       it 'birthdayが空では登録できない' do
         @user.password = ''
         @user.valid?
@@ -123,7 +122,7 @@ RSpec.describe User, type: :model do
         @user.password = '1111111'
         @user.password_confirmation = '1111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordとパスワード（確認用）値が一致しないと登録できない' do
@@ -137,14 +136,14 @@ RSpec.describe User, type: :model do
         @user.password = 'testtest'
         @user.password_confirmation = 'testtest'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordは全角では登録できない' do
         @user.password = 'ｔｅsｔｔｅsｔ'
         @user.password_confirmation = 'ｔｅsｔｔｅsｔ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'メールアドレスに@がないと登録できない' do
