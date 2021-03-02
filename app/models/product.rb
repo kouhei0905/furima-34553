@@ -18,15 +18,17 @@ class Product < ApplicationRecord
     validates :status_id
     validates :burden_id
     validates :d_day_id
-    validates :price
     validates :prefecture_id
     validates :image
+    validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   end
 
-  validates :genre_id, numericality: { other_than: 1 }
-  validates :d_day_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :burden_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-
+  with_options numericality: { other_than: 1 } do
+    validates :genre_id
+    validates :d_day_id
+    validates :status_id
+    validates :burden_id
+    validates :prefecture_id
+  end
+  validates :price, numericality: true
 end
