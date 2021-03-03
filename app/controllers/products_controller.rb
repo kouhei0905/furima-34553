@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   def show
   end
 
-  def edit 
+  def edit
   end
 
   def update
@@ -54,4 +54,4 @@ class ProductsController < ApplicationController
   def set_index
     redirect_to action: :index unless @product.user_id == current_user.id
   end
-  end
+end
