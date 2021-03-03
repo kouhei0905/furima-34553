@@ -31,5 +31,4 @@ class Product < ApplicationRecord
   end
 
   validates :price, numericality: true
-  
 end
