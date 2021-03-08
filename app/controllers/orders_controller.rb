@@ -1,11 +1,15 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_purchase_shipping, only: [:index, :create]
+
   def index
-    @product = Product.find(params[:product_id])
     @purchase_shipping = PurchaseShipping.new
+    if current_user == @product.user
+      redirect_to root_path
+      end
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @purchase_shipping = PurchaseShipping.new(purchase_shipping_params)
     if @purchase_shipping.valid?
       pay_item
@@ -30,4 +34,9 @@ class OrdersController < ApplicationController
       currency: 'jpy' 
     )
   end
+
+  def set_purchase_shipping
+    @product = Product.find(params[:product_id])
+  end
+
 end

@@ -5,11 +5,21 @@ class PurchaseShipping
 
   with_options presence: true do
     validates :prefecture_id 
-    validates :postalcode
     validates :addres 
     validates :building
-    validates :phonenumber
     validates :token
+
+    with_options numericality: { other_than: 1 } do
+    validates :prefecture_id
+    end
+
+    with_options format: { with: /\A\d{3}[-]\d{4}\z/ } do
+      validates :postalcode
+    end
+
+    with_options format: { with: /\A\d{11}\z/ } do
+    validates :phonenumber
+    end
   end
 
   def save
