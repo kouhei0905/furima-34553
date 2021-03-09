@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_index, only: [:edit, :update, :destroy]
+  before_action :set2_index, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.all.order(created_at: :DESC)
@@ -52,5 +53,11 @@ class ProductsController < ApplicationController
 
   def set_index
     redirect_to action: :index unless @product.user_id == current_user.id
+  end
+
+  def set2_index
+    if @product.purchase.present?
+      redirect_to root_path
+    end
   end
 end
