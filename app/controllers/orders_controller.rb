@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_purchase_shipping, only: [:index, :create]
+  before_action :set_index, only: [:index, :create]
 
   def index
     @purchase_shipping = PurchaseShipping.new
-    redirect_to root_path if current_user == @product.user
   end
 
   def create
@@ -37,5 +37,9 @@ class OrdersController < ApplicationController
 
   def set_purchase_shipping
     @product = Product.find(params[:product_id])
+  end
+
+  def set_index
+    redirect_to root_path if current_user == @product.user || @product.purchase.present?
   end
 end
