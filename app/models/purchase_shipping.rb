@@ -8,6 +8,7 @@ class PurchaseShipping
     validates :addres 
     validates :building
     validates :token
+    validates :municipality
 
     with_options numericality: { other_than: 1 } do
     validates :prefecture_id
@@ -17,7 +18,7 @@ class PurchaseShipping
       validates :postalcode
     end
 
-    with_options format: { with: /\A\d{11}\z/ } do
+    with_options format: { with: /\A(((0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1}|[5789]0[-(]?\d{4})[-)]?)|\d{1,4}\-?)\d{4}|0120[-(]?\d{3}[-)]?\d{3})\z/ } do
     validates :phonenumber
     end
   end
