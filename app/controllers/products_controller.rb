@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_index, only: [:edit, :update, :destroy]
+  before_action :soldout, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.all.order(created_at: :DESC)
@@ -37,7 +38,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to root_path
-    end
+  end
 
   private
 
@@ -52,5 +53,9 @@ class ProductsController < ApplicationController
 
   def set_index
     redirect_to action: :index unless @product.user_id == current_user.id
+  end
+
+  def soldout
+    redirect_to root_path if @product.purchase.present?
   end
 end
