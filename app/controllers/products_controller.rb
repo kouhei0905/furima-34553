@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to root_path
-    end
+  end
 
   private
 
@@ -56,8 +56,6 @@ class ProductsController < ApplicationController
   end
 
   def set2_index
-    if @product.purchase.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @product.purchase.present?
   end
 end

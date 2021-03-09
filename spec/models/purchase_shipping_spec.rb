@@ -14,19 +14,19 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'postalcodeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
       @purchase_shipping.postalcode = '1234567'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Postalcode is invalid")
+      expect(@purchase_shipping.errors.full_messages).to include('Postalcode is invalid')
     end
 
     it 'postalcodeが空だと保存できないこと' do
       @purchase_shipping.postalcode = ''
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Postalcode can't be blank", "Postalcode is invalid")
+      expect(@purchase_shipping.errors.full_messages).to include("Postalcode can't be blank", 'Postalcode is invalid')
     end
 
     it 'prefecture_idを選択していないと保存できないこと' do
       @purchase_shipping.prefecture_id = 1
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Prefecture must be other than 1")
+      expect(@purchase_shipping.errors.full_messages).to include('Prefecture must be other than 1')
     end
     it 'municipalityが空だと保存できないこと' do
       @purchase_shipping.municipality = ''
@@ -51,8 +51,7 @@ RSpec.describe PurchaseShipping, type: :model do
     it 'phonenumberが12桁だと保存できないこと' do
       @purchase_shipping.phonenumber = '123456789101'
       @purchase_shipping.valid?
-      expect(@purchase_shipping.errors.full_messages).to include("Phonenumber is invalid")
+      expect(@purchase_shipping.errors.full_messages).to include('Phonenumber is invalid')
     end
-
   end
 end
