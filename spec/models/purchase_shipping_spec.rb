@@ -4,7 +4,9 @@ RSpec.describe PurchaseShipping, type: :model do
   describe '住所情報の保存' do
     before do
       user = FactoryBot.create(:user)
-      @purchase_shipping = FactoryBot.build(:purchase_shipping, user_id: user.id)
+      product = FactoryBot.create(:product)
+      @purchase_shipping = FactoryBot.build(:purchase_shipping, user_id: user.id, product_id: product.id)
+      sleep(1)
     end
     context '商品購入できるとき' do
     it 'すべての値が正しく入力されていれば保存できること' do
@@ -49,6 +51,12 @@ RSpec.describe PurchaseShipping, type: :model do
       @purchase_shipping.phonenumber = ''
       @purchase_shipping.valid?
       expect(@purchase_shipping.errors.full_messages).to include("Phonenumber can't be blank")
+    end
+
+    it 'phonenumberが英数混合だと保存できないこと' do
+      @purchase_shipping.phonenumber = '090aaaaaaaa'
+      @purchase_shipping.valid?
+      expect(@purchase_shipping.errors.full_messages).to include("Phonenumber is invalid")
     end
     it 'phonenumberが12桁だと保存できないこと' do
       @purchase_shipping.phonenumber = '123456789101'
